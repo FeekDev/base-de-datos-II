@@ -16,7 +16,7 @@ INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2002, 'Laura
 INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2003, 'Andrés Morales', 'Cra 55 #78-90', 170, 3109876543);
 INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2004, 'Valentina Cruz', 'Av Paseo Diag 26 #56-14', 591, 3102345678);
 INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2005, 'Javier Reyes', 'Casco Viejo', 591, 3208765432);
-INSERT INTO cliente (nombre, documento, dir, cod_pais, tel) VALUES ('Catalina Vega', 2006, 'Cinta Costera', 591, 3101112223);
+INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES ('Catalina Vega', 2006, 'Cinta Costera', 591, 3101112223);
 INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2007, 'Nicolás Sánchez', 'Av Francisco de Miranda', 862, 3203334445);
 INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2008, 'Gabriela Ruiz', 'Cra 51 #34-56', 170, 3105556667);
 INSERT INTO cliente (documento, nombre, dir, cod_pais, tel) VALUES (2009, 'Felipe Acosta', 'Av Bolívar', 862, 3207778889);
