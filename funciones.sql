@@ -10,3 +10,13 @@ END AS Tipo_cliente
 FROM cliente c
 LEFT JOIN venta v on v.doc_cli = c.documento
 GROUP BY c.documento, c.nombre
+
+CREATE PROCEDURE Ingresar_actualizar
+-- Indicar los campos --
+@valor NUMERIC(18,0),
+@cantidad INT
+@nombre VARCHAR(50)
+AS
+BEGIN
+
+END
