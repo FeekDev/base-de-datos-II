@@ -122,6 +122,8 @@ INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (10
 INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (12, 22, 600000, 1);
 INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (12, 23, 30000000, 50);
 
+
+
 -- =====================================================
 -- CONSULTAS
 -- =====================================================

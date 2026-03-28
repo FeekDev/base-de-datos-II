@@ -468,6 +468,75 @@ END
 
 EXEC insertar_ventas
 
+-- =====================================================
+-- PROCEDIMIENTOS venta v2
+-- =====================================================
+
+CREATE PROCEDURE insertar_300mil_ventas
+AS
+BEGIN
+	DECLARE @contador INT = 1;
+	DECLARE @doc_vendor_idx numeric(12,0);
+	DECLARE @doc_cli_idx numeric(12,0);
+	DECLARE @valor NUMERIC(18,0);
+	DECLARE @fecha DATE;
+	DECLARE @factura_num INT = 1014;
+	
+	-- Arrays de documentos válidos
+	DECLARE @vendedores TABLE (idx INT, documento NUMERIC(12,0));
+	DECLARE @clientes TABLE (idx INT, documento NUMERIC(12,0));
+	
+	-- Llenar tabla de vendedores (46 vendedores: 1000001 a 1000046)
+	INSERT INTO @vendedores VALUES 
+	(1, 1000001), (2, 1000002), (3, 1000003), (4, 1000004), (5, 1000005),
+	(6, 1000006), (7, 1000007), (8, 1000008), (9, 1000009), (10, 1000010),
+	(11, 1000011), (12, 1000012), (13, 1000013), (14, 1000014), (15, 1000015),
+	(16, 1000016), (17, 1000017), (18, 1000018), (19, 1000019), (20, 1000020),
+	(21, 1000021), (22, 1000022), (23, 1000023), (24, 1000024), (25, 1000025),
+	(26, 1000026), (27, 1000027), (28, 1000028), (29, 1000029), (30, 1000030),
+	(31, 1000031), (32, 1000032), (33, 1000033), (34, 1000034), (35, 1000035),
+	(36, 1000036), (37, 1000037), (38, 1000038), (39, 1000039), (40, 1000040),
+	(41, 1000041), (42, 1000042), (43, 1000043), (44, 1000044), (45, 1000045), (46, 1000046);
+	
+	-- Llenar tabla de clientes (500 clientes: 10001 a 10500)
+	DECLARE @i INT = 1;
+	DECLARE @doc_numero INT = 10001;
+	WHILE @i <= 500
+	BEGIN
+		INSERT INTO @clientes VALUES (@i, @doc_numero);
+		SET @doc_numero = @doc_numero + 1;
+		SET @i = @i + 1;
+	END;
+	
+	-- Loop para insertar 300,000 ventas
+	WHILE @contador <= 300000
+	BEGIN
+		-- Calcular índices cíclicos
+		SET @doc_vendor_idx = ((@contador - 1) % 46) + 1;
+		SET @doc_cli_idx = ((@contador - 1) % 500) + 1;
+		
+		-- Generar valor aleatorio entre 21000000 y 55000000
+		SET @valor = 21000000 + (ABS(CHECKSUM(NEWID())) % 34000001);
+		
+		-- Generar fecha aleatoria en el rango de 2024-01-01 a 2026-03-28
+		SET @fecha = DATEADD(DAY, ABS(CHECKSUM(NEWID())) % 813, '2024-01-01');
+		
+		-- Incrementar número de factura
+		SET @factura_num = @factura_num + 1;
+		
+		-- Insertar venta con vendedor y cliente aleatorios
+		INSERT INTO venta (valor, fecha, factura_num, doc_vendor, doc_cli)
+		VALUES(@valor, @fecha, @factura_num,
+			   (SELECT documento FROM @vendedores WHERE idx = @doc_vendor_idx),
+			   (SELECT documento FROM @clientes WHERE idx = @doc_cli_idx));
+		
+		SET @contador = @contador + 1;
+	END
+	
+	PRINT 'Se insertaron 300,000 registros de ventas exitosamente.';
+END
+GO
+
 -- ====================================
 -- PROCEDIMIENTO: Registrar items_venta
 -- ====================================

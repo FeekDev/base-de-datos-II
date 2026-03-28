@@ -104,12 +104,11 @@ BEGIN TRY
     DECLARE @i BIGINT = 1
     DECLARE @doc_cli NUMERIC(12,0)
     DECLARE @doc_vendor NUMERIC(12,0)
-    DECLARE @codigo_pdt INT
-    DECLARE @cantidad INT
+    DECLARE @codigo_vta INT
     DECLARE @factura_num INT = 1000
     DECLARE @precio_producto NUMERIC(18,0)
-    DECLARE @valor_total NUMERIC(18,0)
-    DECLARE @fecha_venta DATETIME
+    DECLARE @valor NUMERIC(18,0)
+    DECLARE @fecha DATETIME
     DECLARE @min_cliente NUMERIC(12,0)
     DECLARE @max_cliente NUMERIC(12,0)
     DECLARE @min_vendedor NUMERIC(12,0)
