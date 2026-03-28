@@ -1,15 +1,4 @@
--- =====================================================
--- CREACIÓN DE BASE DE DATOS Y TABLAS
--- =====================================================
-
-IF OBJECT_ID('productos') is not null
- drop database productos
-create database productos;
-
-GO 
-USE productos
-GO 
-
+,
 CREATE TABLE vendedor(
 	documento numeric(12,0) NOT NULL PRIMARY KEY,
 	nombre varchar(35),
@@ -21,7 +10,7 @@ CREATE TABLE cliente (
 	documento numeric(12,0) NOT NULL PRIMARY KEY,
 	nombre varchar(35),
 	dir varchar(50),
-	cod_pais int,
+	cod_pais int
 	tel numeric(15,0)
 );
 
@@ -132,6 +121,8 @@ INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (10
 INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (10, 21, 55000000, 3);
 INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (12, 22, 600000, 1);
 INSERT INTO items_venta (codigo_pdt, codigo_vta, valor_vta, cantidad) VALUES (12, 23, 30000000, 50);
+
+
 
 -- =====================================================
 -- CONSULTAS
