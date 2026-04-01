@@ -58,6 +58,7 @@ as
 begin
 return declare @subtotal = @precio * @cantidad
 end
+
 create function items_venta
 (
     @precio numeric(18,0),
