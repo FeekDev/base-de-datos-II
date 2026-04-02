@@ -11,9 +11,9 @@ BEGIN
 END
 
 --- Recordar que los parametros deben ser separados por comas ---
-SELECT codigo_vta, cantidad, valor_vta, 
-dbo.calcular_subtotal(valor_vta, cantidad) as subtotal
-FROM items_venta
+SELECT valor 
+dbo.calcular_subtotal(valor, cantidad) as subtotal
+FROM productos
 
 -- Procedimiento para insertar una venta ---
 ALTER PROCEDURE sp_CrearVenta
@@ -38,10 +38,28 @@ SELECT top 1 codigo_vta from venta
     ORDER BY codigo_vta DESC
 
  -- agregar producto a la venta ---
- CREATE PROCEDURE sp_AgregarProductoVenta
- @id_venta
- @id_producto
- @cantidad
+ ALTER PROCEDURE sp_AgregarProductoVenta
+ @id_venta INT,
+ @id_producto INT,
+ @cantidad INT,
+ @valor numeric(18,0)
  As
  BEGIN
- INSERT INTO items_venta()
+ SELECT TOP 1 p.codigo
+ FROM items_venta i
+ JOIN productos p ON 
+ i.codigo_pdt = p.codigo 
+ WHERE p.codigo = @id_producto
+ IF @cantidad > 1
+    SET @valor = dbo.calcular_subtotal((SELECT valor FROM productos WHERE codigo = @id_producto), @cantidad)
+ ELSE
+    SET @valor = (SELECT valor FROM productos WHERE codigo = @id_producto)
+ END
+ INSERT INTO items_venta(codigo_pdt,codigo_vta,valor_vta,cantidad)
+ VALUES(@id_producto,@id_venta,@valor,@cantidad)
+
+ EXEC sp_AgregarProductoVenta
+    @id_venta = 1031,
+    @id_producto = 1,
+    @cantidad = 5
+    @valor = 0
